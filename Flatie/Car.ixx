@@ -24,28 +24,33 @@ namespace {
 export class Car {
 private:
 	float speed = 0;
-	float power = .03;
-	float brakingPower = .05;
+	float power = 1e2f;
+	float brakingPower = 1e3;
 	float angle = 0;
-	float dragCoeff = .01;
+	float dragCoeff = .02f;
 	bool reverse = false;
+
+	bool brakeAtUpdate = false;
+	bool gasAtUpdate = false;
+
 	
-	float asGoodAsStopped = .01;
+	float asGoodAsStopped = 1e-2f;
 
 	sf::Time delayToReverse = sf::milliseconds(300);
 	sf::Clock timeOfStop;
+	sf::Clock tick;
 
 	std::vector<sf::RectangleShape> shapes;
 
 
 	void resetShapes() {
 		shapes.clear();
-		float w = 20;
-		float h = 30;
+		float w = 3;
+		float h = 5;
 
 		sf::RectangleShape body(sf::Vector2f(w, h));
-		body.setOrigin(w / 2, 5);
-		body.setPosition(50, 10);
+		body.setOrigin(w / 2, .5f);
+		body.setPosition(5, 5);
 		body.setFillColor(sf::Color::Cyan);
 
 		shapes.push_back(body);
@@ -77,24 +82,39 @@ public:
 	}
 
 	void gas() {
-		speed += !reverse ? power : -power;
+		//speed += !reverse ? power : -power;
+		gasAtUpdate = true;
 	}
 
 	void brake() {
-		decelerate(brakingPower);
+		//decelerate(brakingPower);
+		brakeAtUpdate = true;
 	}
 
 	void steer(float degrees) {
-		angle += speed * degrees;
+		angle += speed * degrees * 3e-3;
 	}
 
 	void update() {
-		sf::Vector2f d(sinDeg(-angle)*speed, cosDeg(-angle)*speed);
-		decelerate(dragCoeff * speed * speed);
+		float deltaT = (float)tick.getElapsedTime().asMicroseconds() / 1e6f;
+		tick.restart();
+
+		sf::Vector2f d(sinDeg(-angle)*speed*deltaT, cosDeg(-angle)*speed*deltaT);
+		decelerate(dragCoeff * speed * speed * deltaT);
 
 		if (!speed && reverse)
 			changeFromReverse();
 
+		if(brakeAtUpdate)
+			decelerate(brakingPower);
+
+		if(gasAtUpdate)
+			speed += (!reverse ? 1 : -1) * power * deltaT;
+
+		gasAtUpdate = false;
+		brakeAtUpdate = false;
+
+		std::cout << "speed: " << deltaT << '\n';
 
 		for (auto& i : shapes) {
 			i.setPosition(i.getPosition() + d);
