@@ -1,6 +1,7 @@
 #include <vector>
 #include <cmath>
 #include <SFML/Graphics.hpp>
+#include <SFML/System/Clock.hpp>
 
 
 export module Car;
@@ -24,6 +25,11 @@ private:
 	float power = .03;
 	float brakingPower = .05;
 	float angle = 0;
+	float dragCoeff = .01;
+	bool reverse = false;
+
+	sf::Time delayToReverse = sf::milliseconds(500);
+	sf::Clock timeOfStop;
 
 	std::vector<sf::RectangleShape> shapes;
 
@@ -41,29 +47,38 @@ private:
 		shapes.push_back(body);
 	}
 
+	void decelerate(float value) {
+		float prev = speed;
+		speed += speed > 0 ? -value : value;
+
+		if (prev * speed < 0) {
+			speed = 0;
+			changeFromReverse();
+		}
+	}
+
 public:
 	Car() {
 		resetShapes();
 	}
 
 	void gas() {
-		speed += power;
+		speed += !reverse ? power : -power;
 	}
 
 	void brake() {
-		speed -= brakingPower;
-		if (speed < 0)
-			speed = 0;
+		decelerate(brakingPower);
 	}
 
 	void steer(float degrees) {
-		if (!speed) return;
-
-		angle += degrees;
+		angle += speed * degrees;
 	}
 
 	void update() {
 		sf::Vector2f d(sinDeg(-angle)*speed, cosDeg(-angle)*speed);
+		decelerate(dragCoeff * speed * speed);
+
+
 
 		for (auto& i : shapes) {
 			i.setPosition(i.getPosition() + d);
@@ -77,5 +92,20 @@ public:
 		for (auto i : shapes)
 			window.draw(i);
 	}
-};
 
+	bool isStill() {
+		return speed == 0;
+	}
+
+	bool isInReverse() {
+		return reverse;
+	}
+
+	void changeToReverse() {
+		reverse = true;
+	}	
+	
+	void changeFromReverse() {
+		reverse = false;
+	}
+};

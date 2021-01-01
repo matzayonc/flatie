@@ -5,6 +5,7 @@ import Car;
 
 
 
+
 int main() {
 
     sf::ContextSettings(0, 0, 4);
@@ -20,14 +21,24 @@ int main() {
         while (window.pollEvent(event)) {
             if (event.type == sf::Event::Closed)
                 window.close();
-
-            
         }
 
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
-            car.gas();
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
-            car.brake();
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
+           if (!car.isInReverse())
+                car.gas();
+            else
+                car.brake();
+        }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
+            if (car.isInReverse())
+                car.gas();
+            else if (car.isStill()) {
+                car.changeToReverse();
+                car.gas();
+            }
+            else
+                car.brake();
+        }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
             car.steer(-1);
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
