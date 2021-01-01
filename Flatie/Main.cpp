@@ -32,10 +32,8 @@ int main() {
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
             if (car.isInReverse())
                 car.gas();
-            else if (car.isStill()) {
+            else if (car.isStill())
                 car.changeToReverse();
-                car.gas();
-            }
             else
                 car.brake();
         }

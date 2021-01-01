@@ -1,20 +1,22 @@
+
 #include <vector>
 #include <cmath>
+#include <iostream>
 #include <SFML/Graphics.hpp>
 #include <SFML/System/Clock.hpp>
 
-
 export module Car;
+
 
 namespace {
 	const double piii = 2 * std::acos(0.0);
 
 	float sinDeg(float degrees) {
-		return std::sin(degrees * piii / 180);
+		return (float)std::sin(degrees * piii / 180);
 	}
 
 	float cosDeg(float degrees) {
-		return std::cos(degrees * piii / 180);
+		return (float)std::cos(degrees * piii / 180);
 	}
 }
 
@@ -27,8 +29,10 @@ private:
 	float angle = 0;
 	float dragCoeff = .01;
 	bool reverse = false;
+	
+	float asGoodAsStopped = .01;
 
-	sf::Time delayToReverse = sf::milliseconds(500);
+	sf::Time delayToReverse = sf::milliseconds(300);
 	sf::Clock timeOfStop;
 
 	std::vector<sf::RectangleShape> shapes;
@@ -48,13 +52,23 @@ private:
 	}
 
 	void decelerate(float value) {
+		if (!speed) return;
+
 		float prev = speed;
 		speed += speed > 0 ? -value : value;
 
-		if (prev * speed < 0) {
-			speed = 0;
-			changeFromReverse();
-		}
+		if (prev * speed < 0 || (speed && abs(speed) < asGoodAsStopped))
+			stop();
+	}
+
+	void stop() {
+		speed = 0;
+		timeOfStop.restart();
+	}
+
+
+	bool canChangeReverse() {
+		return !speed && timeOfStop.getElapsedTime() >= delayToReverse;
 	}
 
 public:
@@ -78,6 +92,8 @@ public:
 		sf::Vector2f d(sinDeg(-angle)*speed, cosDeg(-angle)*speed);
 		decelerate(dragCoeff * speed * speed);
 
+		if (!speed && reverse)
+			changeFromReverse();
 
 
 		for (auto& i : shapes) {
@@ -89,12 +105,12 @@ public:
 	void render(sf::RenderWindow& window) {
 		update();
 
-		for (auto i : shapes)
+		for (const auto i : shapes)
 			window.draw(i);
 	}
 
 	bool isStill() {
-		return speed == 0;
+		return !speed;
 	}
 
 	bool isInReverse() {
@@ -102,10 +118,16 @@ public:
 	}
 
 	void changeToReverse() {
+		if (!canChangeReverse()) return;
+		
+		timeOfStop.restart();
 		reverse = true;
 	}	
 	
 	void changeFromReverse() {
+		if (!canChangeReverse()) return;
+
+		timeOfStop.restart();
 		reverse = false;
 	}
 };
