@@ -3,6 +3,7 @@
 
 import Abstract;
 import Car;
+import Person;
 
 
 
@@ -15,6 +16,7 @@ int main() {
     window.setFramerateLimit(144);
      
     Car car;
+    Person person;
 
     sf::View view(sf::FloatRect(0.f, 0.f, window.getSize().x, window.getSize().y));
     view.setCenter(sf::Vector2f(.0f, .0f));
@@ -45,6 +47,7 @@ int main() {
 
         window.clear();
 
+        person.render(window);
         steerACar(car);
         car.render(window);
 

@@ -1,4 +1,5 @@
 #include <vector>
+#include <memory>
 #include <SFML/Graphics.hpp>
 #include <SFML/System/Clock.hpp>
 
@@ -9,6 +10,7 @@ export module Abstract;
 export class Entity {
 protected:
 	std::vector<sf::RectangleShape> shapes;
+	std::vector<sf::CircleShape> circles;
 	sf::Clock tick;
 
 
@@ -16,11 +18,22 @@ protected:
 		tick.restart();
 	}
 
+	virtual void clearShapes() {
+		shapes.clear();
+		circles.clear();
+	}
+
+	virtual void resetShapes() {}
+
+
 public:
-	virtual void render(sf::RenderWindow& window) {
+	 void render(sf::RenderWindow& window){
 		update();
 
-		for (const auto i : shapes)
+		for (auto i : shapes)
 			window.draw(i);
-	}
+
+		for(auto i : circles)
+			window.draw(i);
+	 }
 };

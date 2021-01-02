@@ -38,7 +38,7 @@ private:
 
 
 	void resetShapes() {
-		shapes.clear();
+		clearShapes();
 		float w = 3;
 		float h = 5;
 
@@ -91,7 +91,7 @@ public:
 		sf::Vector2f d(sinDeg(-angle)*speed*deltaT, cosDeg(-angle)*speed*deltaT);
 		decelerate(dragCoeff * speed * speed * deltaT);
 
-		angle += speed * steeringAngle * deltaT * 5e-1;
+		angle += speed * steeringAngle * deltaT * 5e-1f;
 		steeringAngle = 0;
 
 
