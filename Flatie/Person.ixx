@@ -9,12 +9,11 @@ private:
 
 	void resetShapes() {
 
-		sf::CircleShape head(.5f, 30);
-		head.setPosition(3, 3);
-		head.setOrigin(3, 3);
-		head.setFillColor(sf::Color::Red);
+		auto head = std::make_shared<sf::CircleShape>(.5f, 30);
+		head->setOrigin(3, 3);
+		head->setFillColor(sf::Color::Red);
 
-		circles.push_back(head);
+		shapes.push_back(head);
 	}
 
 public:

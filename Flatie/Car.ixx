@@ -38,14 +38,14 @@ private:
 
 
 	void resetShapes() {
-		clearShapes();
+		shapes.clear();
 		float w = 3;
 		float h = 5;
 
-		sf::RectangleShape body(sf::Vector2f(w, h));
-		body.setOrigin(w / 2, .5f);
-		body.setPosition(5, 5);
-		body.setFillColor(sf::Color::Cyan);
+		auto body = std::make_shared<sf::RectangleShape>(sf::Vector2f(w, h));
+		body->setOrigin(w / 2, .5f);
+		body->setPosition(5, 5);
+		body->setFillColor(sf::Color::Cyan);
 
 		shapes.push_back(body);
 	}
@@ -106,8 +106,8 @@ public:
 
 
 		for (auto& i : shapes) {
-			i.setPosition(i.getPosition() + d);
-			i.setRotation(angle);
+			i->setPosition(i->getPosition() + d);
+			i->setRotation(angle);
 		}
 	}
 
