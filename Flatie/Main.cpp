@@ -1,11 +1,8 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 
-import Abstract;
 import Car;
 import Person;
-
-
 
 
 
@@ -48,8 +45,9 @@ int main() {
         window.clear();
 
         person.render(window);
-        steerACar(car);
-        car.render(window);
+        //steerACar(car);
+        steerAPerson(person);
+        //car.render(window);
 
         window.display();
     }

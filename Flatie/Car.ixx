@@ -85,9 +85,7 @@ public:
 	}
 
 	void update() {
-		float deltaT = (float)tick.getElapsedTime().asMicroseconds() / 1e6f;
-		tick.restart();
-
+		float deltaT = tick();
 		sf::Vector2f d(sinDeg(-angle)*speed*deltaT, cosDeg(-angle)*speed*deltaT);
 		decelerate(dragCoeff * speed * speed * deltaT);
 
