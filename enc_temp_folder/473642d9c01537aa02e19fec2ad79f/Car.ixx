@@ -108,6 +108,8 @@ public:
 			speed += (!reverse ? 1 : -1) * power * deltaT;
 
 
+		std::cout << "speed: " << deltaT << '\n';
+
 		for (auto& i : shapes) {
 			i.setPosition(i.getPosition() + d);
 			i.setRotation(angle);

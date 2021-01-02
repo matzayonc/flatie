@@ -33,6 +33,10 @@ int main() {
                     view.zoom(1.1f);
                     window.setView(view);
                 }
+
+            if (event.type == sf::Event::MouseWheelScrolled) {
+                std::cout << 's' << event.mouseWheel.delta << '\n';
+            }
         }
 
 
