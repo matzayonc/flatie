@@ -30,10 +30,6 @@ private:
 	float dragCoeff = .02f;
 	bool reverse = false;
 
-	bool brakeAtUpdate = false;
-	bool gasAtUpdate = false;
-
-	
 	float asGoodAsStopped = 1e-2f;
 
 	sf::Time delayToReverse = sf::milliseconds(300);
@@ -77,19 +73,14 @@ private:
 	}
 
 public:
+	bool gasing = false;
+	bool braking = false;
+
+
 	Car() {
 		resetShapes();
 	}
 
-	void gas() {
-		//speed += !reverse ? power : -power;
-		gasAtUpdate = true;
-	}
-
-	void brake() {
-		//decelerate(brakingPower);
-		brakeAtUpdate = true;
-	}
 
 	void steer(float degrees) {
 		angle += speed * degrees * 3e-3;
@@ -105,14 +96,12 @@ public:
 		if (!speed && reverse)
 			changeFromReverse();
 
-		if(brakeAtUpdate)
+		if(braking)
 			decelerate(brakingPower);
 
-		if(gasAtUpdate)
+		if(gasing)
 			speed += (!reverse ? 1 : -1) * power * deltaT;
 
-		gasAtUpdate = false;
-		brakeAtUpdate = false;
 
 		std::cout << "speed: " << deltaT << '\n';
 
@@ -151,3 +140,24 @@ public:
 		reverse = false;
 	}
 };
+
+
+export void steerACar(Car& car) {
+	if (car.isStill() && sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+		car.changeToReverse();
+
+	if (!car.isInReverse()) {
+		car.gasing = sf::Keyboard::isKeyPressed(sf::Keyboard::W);
+		car.braking = sf::Keyboard::isKeyPressed(sf::Keyboard::S);
+	}
+	else {
+		car.braking = sf::Keyboard::isKeyPressed(sf::Keyboard::W);
+		car.gasing = sf::Keyboard::isKeyPressed(sf::Keyboard::S);
+	}
+
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+		car.steer(-10);
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+		car.steer(10);
+}

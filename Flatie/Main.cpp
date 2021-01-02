@@ -6,6 +6,7 @@ import Car;
 
 
 
+
 int main() {
 
     sf::ContextSettings(0, 0, 4);
@@ -35,27 +36,9 @@ int main() {
         }
 
 
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
-           if (!car.isInReverse())
-                car.gas();
-            else
-                car.brake();
-        }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
-            if (car.isInReverse())
-                car.gas();
-            else if (car.isStill())
-                car.changeToReverse();
-            else
-                car.brake();
-        }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
-            car.steer(-10);
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-            car.steer(10);
-
         window.clear();
 
+        steerACar(car);
         car.render(window);
 
         window.display();
