@@ -6,7 +6,7 @@
 #include <SFML/System/Clock.hpp>
 
 export module Car;
-
+import Abstract;
 
 namespace {
 	const double piii = 2 * std::acos(0.0);
@@ -21,7 +21,7 @@ namespace {
 }
 
 
-export class Car {
+export class Car:public Entity {
 private:
 	float speed = 0;
 	float power = 1e2f;
@@ -35,9 +35,6 @@ private:
 
 	sf::Time delayToReverse = sf::milliseconds(300);
 	sf::Clock timeOfStop;
-	sf::Clock tick;
-
-	std::vector<sf::RectangleShape> shapes;
 
 
 	void resetShapes() {
@@ -114,12 +111,6 @@ public:
 		}
 	}
 
-	void render(sf::RenderWindow& window) {
-		update();
-
-		for (const auto i : shapes)
-			window.draw(i);
-	}
 
 	bool isStill() {
 		return !speed;

@@ -21,5 +21,11 @@
     <ClCompile Include="Car.ixx">
       <Filter>Header Files</Filter>
     </ClCompile>
+    <ClCompile Include="Person.ixx">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Abstract.ixx">
+      <Filter>Header Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

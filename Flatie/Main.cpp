@@ -1,6 +1,7 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 
+import Abstract;
 import Car;
 
 
@@ -34,8 +35,10 @@ int main() {
                     window.setView(view);
                 }
 
-            if (event.type == sf::Event::MouseWheelScrolled) {
-                std::cout << 's' << event.mouseWheel.delta << '\n';
+            if (event.type == sf::Event::MouseWheelMoved) {
+                float delta = (float)event.mouseWheel.delta;
+                view.zoom(1 - (delta / 5));
+                window.setView(view);
             }
         }
 
