@@ -6,7 +6,7 @@
 #include <SFML/System/Clock.hpp>
 
 export module Car;
-import Abstract;
+import Entity;
 
 namespace {
 	const double piii = 2 * std::acos(0.0);

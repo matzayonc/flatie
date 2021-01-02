@@ -3,7 +3,7 @@
 #include <SFML/Graphics.hpp>
 
 export module Person;
-import Abstract;
+import Entity;
 
 export class Person : public Entity {
 private:
@@ -34,10 +34,16 @@ public:
 	}
 
 	void go(sf::Vector2f whereTo) {
-
 		direction = whereTo;
 	}
+
+	void teleport(sf::Vector2f whereTo) {
+		direction = whereTo;
+		for (auto& i : shapes)
+			i->setPosition(whereTo);
+	}
 };
+
 
 export void steerAPerson(Person& person) {
 

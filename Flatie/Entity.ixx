@@ -4,7 +4,7 @@
 #include <SFML/System/Clock.hpp>
 
 
-export module Abstract;
+export module Entity;
 
 
 export class Entity {
@@ -23,11 +23,28 @@ protected:
 	virtual void resetShapes() {}
 
 
+
 public:
+	sf::Vector2f getCoords() {
+		if (!shapes.size()) sf::Vector2f{ 0.f, 0.f };
+			
+		return shapes[0]->getPosition();
+	}
+
+	sf::FloatRect getGlobalBounds() {
+		if (!shapes.size()) sf::FloatRect{ 0.f, 0.f, 0.f, 0.f };
+
+		return shapes[0]->getGlobalBounds();
+	}
+
 	 void render(sf::RenderWindow& window){
 		update();
 
 		for (auto& i : shapes)
 			window.draw(*i.get());
+	 }
+
+	 bool collides(Entity other) const {
+		 return other.getGlobalBounds().intersects(shapes[0]->getGlobalBounds());
 	 }
 };

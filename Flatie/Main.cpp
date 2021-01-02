@@ -20,6 +20,7 @@ int main() {
     view.zoom(.4f);
     window.setView(view);
 
+    bool inCar = false;
 
     while (window.isOpen())
     {
@@ -27,12 +28,25 @@ int main() {
         while (window.pollEvent(event)) {
             if (event.type == sf::Event::Closed)
                 window.close();
-            if(event.type == sf::Event::KeyPressed)
+            if (event.type == sf::Event::KeyPressed) {
                 if (event.key.code == sf::Keyboard::C) {
                     std::cout << 'a';
                     view.zoom(1.1f);
                     window.setView(view);
                 }
+                if (event.key.code == sf::Keyboard::E) {
+                    if (!inCar && car.collides(person))
+                        inCar = true;
+                    else if(inCar){
+                        person.teleport(car.getCoords() + sf::Vector2f{2.f, 2.f});
+                        inCar = false;
+
+                    }
+                }
+
+            }
+
+
 
             if (event.type == sf::Event::MouseWheelMoved) {
                 float delta = (float)event.mouseWheel.delta;
@@ -44,10 +58,18 @@ int main() {
 
         window.clear();
 
-        person.render(window);
-        //steerACar(car);
-        steerAPerson(person);
-        //car.render(window);
+
+        if (inCar) {
+            steerACar(car);
+            car.render(window);
+        }
+        else {
+            car.render(window);
+            steerAPerson(person);
+            person.render(window);
+
+        }
+        
 
         window.display();
     }

@@ -24,7 +24,7 @@
     <ClCompile Include="Person.ixx">
       <Filter>Header Files</Filter>
     </ClCompile>
-    <ClCompile Include="Abstract.ixx">
+    <ClCompile Include="Entity.ixx">
       <Filter>Header Files</Filter>
     </ClCompile>
   </ItemGroup>

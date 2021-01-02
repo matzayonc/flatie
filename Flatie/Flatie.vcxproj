@@ -147,7 +147,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Abstract.ixx" />
+    <ClCompile Include="Entity.ixx" />
     <ClCompile Include="Car.ixx" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Person.ixx" />
