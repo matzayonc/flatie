@@ -13,10 +13,13 @@ int main() {
     sf::RenderWindow window(sf::VideoMode(400, 400), "SFML testing");
     window.setFramerateLimit(144);
 
-
+    
      
     Car car;
     Person person;
+
+    Person obstacle;
+
 
     sf::View view(sf::FloatRect(0.f, 0.f, window.getSize().x, window.getSize().y));
     view.setCenter(sf::Vector2f(.0f, .0f));
@@ -72,6 +75,13 @@ int main() {
             person.render(window);
 
         }
+
+        if (obstacle.collides(car) || obstacle.collides(person)) {
+            std::cout << "+1\n";
+        }
+        else
+        obstacle.render(window);
+
         
 
         window.display();
