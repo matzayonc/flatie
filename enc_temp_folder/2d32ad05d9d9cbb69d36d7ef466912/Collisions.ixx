@@ -22,11 +22,17 @@ export bool pointInTriangle(sf::Vector2f pt, sf::Vector2f a, sf::Vector2f b, sf:
     return !(has_neg && has_pos);
 }
 
+/*
+export bool pointInTriangle(sf::Vector2f pt, sf::Shape* other) {
+    if (other->getPointCount() != 3) throw "not a triangle!";
+
+    return pointInTriangle(pt, other->getPoint(0), other->getPoint(1), other->getPoint(2));
+}
+*/
 
 sf::Vector2f trasformedPoint(sf::Shape* shape, size_t index) {
     return shape->getTransform().transformPoint(shape->getPoint(index));
 }
-
 
 export bool pointInShape(sf::Vector2f point, sf::Shape* shape) {
     sf::Vector2f first = trasformedPoint(shape, 0);

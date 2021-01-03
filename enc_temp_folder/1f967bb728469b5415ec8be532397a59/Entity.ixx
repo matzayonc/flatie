@@ -55,6 +55,8 @@ public:
 		 return s;
 	 }
 
+
+
 	 bool collides(Entity other) {
 		 if (!boundsCollide(other)) return false;
 		
