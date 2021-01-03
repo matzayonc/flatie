@@ -27,5 +27,8 @@
     <ClCompile Include="Entity.ixx">
       <Filter>Header Files</Filter>
     </ClCompile>
+    <ClCompile Include="Collisions.ixx">
+      <Filter>Header Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

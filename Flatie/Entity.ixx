@@ -5,6 +5,7 @@
 
 
 export module Entity;
+import Collisions;
 
 
 export class Entity {
@@ -44,7 +45,33 @@ public:
 			window.draw(*i.get());
 	 }
 
-	 bool collides(Entity other) const {
+	 bool boundsCollide(Entity other) const {
 		 return other.getGlobalBounds().intersects(shapes[0]->getGlobalBounds());
+	 }
+
+	 sf::Shape* getFirstShape() {
+		 return shapes[0].get();
+	 }
+
+
+
+	 bool collides(Entity other) const {
+		 //return other.getGlobalBounds().intersects(shapes[0]->getGlobalBounds());
+		 /*
+		 sf::Shape* s = shapes[0].get();
+		 sf::Vector2f a = s->getTransform().transformPoint(s->getPoint(0));
+		 sf::Vector2f b = s->getTransform().transformPoint(s->getPoint(1));
+		 sf::Vector2f c = s->getTransform().transformPoint(s->getPoint(2));
+
+		 sf::Shape* o = other.getFirstShape();
+		 sf::Vector2f p = o->getTransform().transformPoint(o->getPoint(0));
+		 */
+
+
+
+
+		 //return pointInShape(sf::Vector2f(0, 0), a);
+		 //return pointInTriangle(p, a, b, c);
+		 return checkCollisions(getFirstShape(), other.getFirstShape());
 	 }
 };

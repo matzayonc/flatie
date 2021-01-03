@@ -147,6 +147,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Collisions.ixx" />
     <ClCompile Include="Entity.ixx" />
     <ClCompile Include="Car.ixx" />
     <ClCompile Include="Main.cpp" />

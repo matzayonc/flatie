@@ -3,6 +3,7 @@
 
 import Car;
 import Person;
+import Collisions;
 
 
 
@@ -11,13 +12,15 @@ int main() {
     sf::ContextSettings(0, 0, 4);
     sf::RenderWindow window(sf::VideoMode(400, 400), "SFML testing");
     window.setFramerateLimit(144);
+
+
      
     Car car;
     Person person;
 
     sf::View view(sf::FloatRect(0.f, 0.f, window.getSize().x, window.getSize().y));
     view.setCenter(sf::Vector2f(.0f, .0f));
-    view.zoom(.4f);
+    view.zoom(.2f);
     window.setView(view);
 
     bool inCar = false;
@@ -35,6 +38,8 @@ int main() {
                     window.setView(view);
                 }
                 if (event.key.code == sf::Keyboard::E) {
+                    std::cout << car.collides(person) << '\n';
+
                     if (!inCar && car.collides(person))
                         inCar = true;
                     else if(inCar){
@@ -45,8 +50,6 @@ int main() {
                 }
 
             }
-
-
 
             if (event.type == sf::Event::MouseWheelMoved) {
                 float delta = (float)event.mouseWheel.delta;

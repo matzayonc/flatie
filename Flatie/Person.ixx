@@ -3,7 +3,9 @@
 #include <SFML/Graphics.hpp>
 
 export module Person;
-import Entity;
+import Entity; 
+import Collisions;
+
 
 export class Person : public Entity {
 private:
@@ -63,6 +65,5 @@ export void steerAPerson(Person& person) {
 	if(dir.x || dir.y)
 		dir /= sqrt(dir.x * dir.x + dir.y * dir.y);
 
-	std::cout << dir.x << '-' << dir.y << ',' << '\n';
 	person.go(dir);
 }

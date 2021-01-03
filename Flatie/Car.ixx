@@ -7,16 +7,17 @@
 
 export module Car;
 import Entity;
+import Collisions;
 
 namespace {
-	const double piii = 2 * std::acos(0.0);
+	const double pi = 2 * std::acos(0.0);
 
 	float sinDeg(float degrees) {
-		return (float)std::sin(degrees * piii / 180);
+		return (float)std::sin(degrees * pi / 180);
 	}
 
 	float cosDeg(float degrees) {
-		return (float)std::cos(degrees * piii / 180);
+		return (float)std::cos(degrees * pi / 180);
 	}
 }
 
@@ -25,9 +26,9 @@ export class Car:public Entity {
 private:
 	float speed = 0;
 	float power = 1e2f;
-	float brakingPower = 1e3;
+	float brakingPower = 1e2;
 	float steeringAngle = 0;
-	float angle = 0;
+	float angle = 270;
 	float dragCoeff = .02f;
 	bool reverse = false;
 
@@ -97,7 +98,7 @@ public:
 			changeFromReverse();
 
 		if(braking)
-			decelerate(brakingPower);
+			decelerate(brakingPower*deltaT);
 
 		if(gasing)
 			speed += (!reverse ? 1 : -1) * power * deltaT;
