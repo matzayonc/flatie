@@ -1,4 +1,5 @@
-s#include <vector>
+
+#include <vector>
 #include <cmath>
 #include <iostream>
 #include <SFML/Graphics.hpp>
@@ -19,7 +20,6 @@ namespace {
 		return (float)std::cos(degrees * pi / 180);
 	}
 }
-
 
 export class Car:public Entity {
 private:
@@ -133,13 +133,14 @@ public:
 	}
 
 	void steer() {
+
 		bool s = sf::Keyboard::isKeyPressed(sf::Keyboard::S);
 		bool w = sf::Keyboard::isKeyPressed(sf::Keyboard::W);
 
 		if (isStill() && s)
 			changeToReverse();
 
-		if (isInReverse()) {
+		if (!isInReverse()) {
 			gasing = w;
 			braking = s;
 		}
@@ -155,4 +156,3 @@ public:
 			turn(10);
 	}
 };
-

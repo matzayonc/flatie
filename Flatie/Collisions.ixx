@@ -29,10 +29,16 @@ sf::Vector2f trasformedPoint(sf::Shape* shape, size_t index) {
 
 //FIXME
 export bool pointInShape(sf::Vector2f point, sf::Shape* shape) {
+    sf::Vector2f first = trasformedPoint(shape, 0);
+    sf::Vector2f second = trasformedPoint(shape, shape->getPointCount()-1);
+
+    for (int j = 1; j < shape->getPointCount()-1; j++)
+        if (pointInTriangle(point, first, second, trasformedPoint(shape, j)))
+            return true;
     
     for (int i = 1; i < shape->getPointCount(); i++) {
-        sf::Vector2f first = trasformedPoint(shape, i-1);
-        sf::Vector2f second = trasformedPoint(shape, i);
+        first = trasformedPoint(shape, i-1);
+        second = trasformedPoint(shape, i);
 
 
         for (int j = i; j < shape->getPointCount(); j++)

@@ -13,6 +13,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Resource Files\Fonts">
+      <UniqueIdentifier>{870c36e5-6a6f-46d9-bc47-0d509168cb70}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Geometry">
+      <UniqueIdentifier>{3e36804c-3523-40af-8ee4-cc51d4f00c61}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -30,5 +36,30 @@
     <ClCompile Include="Collisions.ixx">
       <Filter>Header Files</Filter>
     </ClCompile>
+    <ClCompile Include="Point.cpp">
+      <Filter>Header Files\Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector.cpp">
+      <Filter>Header Files\Geometry</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="data\fonts\Hack-Bold.ttf">
+      <Filter>Resource Files\Fonts</Filter>
+    </Font>
+    <Font Include="data\fonts\Hack-Italic.ttf">
+      <Filter>Resource Files\Fonts</Filter>
+    </Font>
+    <Font Include="data\fonts\Hack.ttf">
+      <Filter>Resource Files\Fonts</Filter>
+    </Font>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Point.hpp">
+      <Filter>Header Files\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector.hpp">
+      <Filter>Header Files\Geometry</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

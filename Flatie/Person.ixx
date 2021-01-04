@@ -22,7 +22,6 @@ private:
 	}
 
 
-
 	void update() {
 		float dTime = tick();
 
@@ -44,26 +43,25 @@ public:
 		for (auto& i : shapes)
 			i->setPosition(whereTo);
 	}
+
+	void steer() {
+
+		sf::Vector2f dir(.0f, .0f);
+
+		auto sq = sqrt(dir.x * dir.x + dir.y * dir.y);
+
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+			dir += sf::Vector2f{ 0, -1 };
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+			dir += sf::Vector2f{ 0, 1 };
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+			dir += sf::Vector2f{ -1, 0 };
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+			dir += sf::Vector2f{ 1, 0 };
+
+		if (dir.x && dir.y)
+			dir /= sqrt(dir.x * dir.x + dir.y * dir.y);
+
+		go(dir);
+	}
 };
-
-
-export void steerAPerson(Person& person) {
-
-	sf::Vector2f dir(.0f, .0f);
-	
-	auto sq = sqrt(dir.x * dir.x + dir.y * dir.y);
-
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
-		dir += sf::Vector2f{ 0, -1 };
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
-		dir += sf::Vector2f{ 0, 1 };
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
-		dir += sf::Vector2f{ -1, 0 };
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-		dir += sf::Vector2f{ 1, 0 };
-
-	if(dir.x || dir.y)
-		dir /= sqrt(dir.x * dir.x + dir.y * dir.y);
-
-	person.go(dir);
-}
