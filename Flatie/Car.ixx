@@ -1,5 +1,4 @@
-
-#include <vector>
+s#include <vector>
 #include <cmath>
 #include <iostream>
 #include <SFML/Graphics.hpp>
@@ -81,7 +80,7 @@ public:
 	}
 
 
-	void steer(float degrees) {
+	void turn(float degrees) {
 		steeringAngle += degrees;
 	}
 
@@ -132,29 +131,28 @@ public:
 		timeOfStop.restart();
 		reverse = false;
 	}
+
+	void steer() {
+		bool s = sf::Keyboard::isKeyPressed(sf::Keyboard::S);
+		bool w = sf::Keyboard::isKeyPressed(sf::Keyboard::W);
+
+		if (isStill() && s)
+			changeToReverse();
+
+		if (isInReverse()) {
+			gasing = w;
+			braking = s;
+		}
+		else {
+			braking = w;
+			gasing = s;
+		}
+
+
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+			turn(-10);
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+			turn(10);
+	}
 };
 
-
-export void steerACar(Car& car) {
-
-	bool s = sf::Keyboard::isKeyPressed(sf::Keyboard::S);
-	bool w = sf::Keyboard::isKeyPressed(sf::Keyboard::W);
-
-	if (car.isStill() && s)
-		car.changeToReverse();
-
-	if (!car.isInReverse()) {
-		car.gasing = w;
-		car.braking = s;
-	}
-	else {
-		car.braking = w;
-		car.gasing = s;
-	}
-
-
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
-		car.steer(-10);
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-		car.steer(10);
-}

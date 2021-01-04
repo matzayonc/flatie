@@ -27,15 +27,19 @@ sf::Vector2f trasformedPoint(sf::Shape* shape, size_t index) {
     return shape->getTransform().transformPoint(shape->getPoint(index));
 }
 
-
+//FIXME
 export bool pointInShape(sf::Vector2f point, sf::Shape* shape) {
-    sf::Vector2f first = trasformedPoint(shape, 0);
-    sf::Vector2f second = trasformedPoint(shape, 1);
+    
+    for (int i = 1; i < shape->getPointCount(); i++) {
+        sf::Vector2f first = trasformedPoint(shape, i-1);
+        sf::Vector2f second = trasformedPoint(shape, i);
 
 
-    for (int i = 2; i < shape->getPointCount(); i++)
-        if (pointInTriangle(point, first, second, trasformedPoint(shape, i)))
-            return true;
+        for (int j = i; j < shape->getPointCount(); j++)
+            if (pointInTriangle(point, first, second, trasformedPoint(shape, j)))
+                return true;
+    }
+
     return false;
 }
 
@@ -74,7 +78,7 @@ export bool checkCollision(sf::Shape* shape, sf::Shape* other) {
     for (int i = 0; i < shape->getPointCount(); i++)
         if (pointInShape(trasformedPoint(shape, i), other))
             return true;
-    /*
+    
     for (int i = 1; i < other->getPointCount(); i++)
         if (lineAcrossShape(trasformedPoint(other, i-1), trasformedPoint(other, i), shape))
             return true;
@@ -82,6 +86,6 @@ export bool checkCollision(sf::Shape* shape, sf::Shape* other) {
     for (int i = 1; i < shape->getPointCount(); i++)
         if (lineAcrossShape(trasformedPoint(shape, i - 1), trasformedPoint(shape, i), other))
             return true;
-            */
+    
     return false;
 }
