@@ -19,6 +19,9 @@
     <Filter Include="Header Files\Geometry">
       <UniqueIdentifier>{3e36804c-3523-40af-8ee4-cc51d4f00c61}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Geometry\Shapes">
+      <UniqueIdentifier>{9b6629b0-e955-4758-a56a-5a7a06bfae55}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -42,6 +45,12 @@
     <ClCompile Include="Vector.cpp">
       <Filter>Header Files\Geometry</Filter>
     </ClCompile>
+    <ClCompile Include="Shape.cpp">
+      <Filter>Header Files\Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="Triangle.cpp">
+      <Filter>Header Files\Geometry\Shapes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Font Include="data\fonts\Hack-Bold.ttf">
@@ -60,6 +69,12 @@
     </ClInclude>
     <ClInclude Include="Vector.hpp">
       <Filter>Header Files\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="Shape.h">
+      <Filter>Header Files\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="Triangle.h">
+      <Filter>Header Files\Geometry\Shapes</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
