@@ -6,8 +6,6 @@ namespace gm {
 	class Shape{
 
 
-
-
 	protected:
 		std::vector<Point> vertices;
 	};

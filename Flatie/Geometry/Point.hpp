@@ -1,7 +1,6 @@
 #pragma once
 #include "Vector.hpp"
 
-
 namespace gm {
 	class Point {
 	protected:
@@ -10,7 +9,7 @@ namespace gm {
 		double x;
 		double y;
 		Point(double x, double y);
-		Point(Point &point);
+		Point(const Point &point);
 		double distanceTo(Point point) const;
 		Point operator+(Vector vector) const;
 		void moveBy(Vector vector);

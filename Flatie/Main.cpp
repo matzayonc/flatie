@@ -14,8 +14,6 @@ import Collisions;
 
 int main() {
     gm::Point point(1, 2);
-    gm::Vector v(point);
-
 
 
 

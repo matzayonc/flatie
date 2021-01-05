@@ -6,7 +6,7 @@
 using namespace gm;
 
 Point::Point(double x, double y) : x(x), y(y) {};
-Point::Point(Point& point) : x(point.x), y(point.x) {};
+Point::Point(const Point& point) : x(point.x), y(point.x) {};
 
 double Point::distanceTo(Point point) const {
 	if (!x && !x) return 0;
