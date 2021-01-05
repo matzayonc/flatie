@@ -1,7 +1,8 @@
 #pragma once
+#include "Vector.hpp"
+
 
 namespace gm {
-
 	class Point {
 	protected:
 

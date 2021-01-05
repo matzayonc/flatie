@@ -20,7 +20,7 @@
       <UniqueIdentifier>{3e36804c-3523-40af-8ee4-cc51d4f00c61}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\Geometry\Shapes">
-      <UniqueIdentifier>{9b6629b0-e955-4758-a56a-5a7a06bfae55}</UniqueIdentifier>
+      <UniqueIdentifier>{695a3918-5cf4-4f8b-a2f4-25548c37150a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -39,16 +39,16 @@
     <ClCompile Include="Collisions.ixx">
       <Filter>Header Files</Filter>
     </ClCompile>
-    <ClCompile Include="Point.cpp">
+    <ClCompile Include="Geometry\Point.cpp">
       <Filter>Header Files\Geometry</Filter>
     </ClCompile>
-    <ClCompile Include="Vector.cpp">
+    <ClCompile Include="Geometry\Shape.cpp">
       <Filter>Header Files\Geometry</Filter>
     </ClCompile>
-    <ClCompile Include="Shape.cpp">
+    <ClCompile Include="Geometry\Vector.cpp">
       <Filter>Header Files\Geometry</Filter>
     </ClCompile>
-    <ClCompile Include="Triangle.cpp">
+    <ClCompile Include="Geometry\Shapes\Triangle.cpp">
       <Filter>Header Files\Geometry\Shapes</Filter>
     </ClCompile>
   </ItemGroup>
@@ -64,16 +64,16 @@
     </Font>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Point.hpp">
+    <ClInclude Include="Geometry\Point.hpp">
       <Filter>Header Files\Geometry</Filter>
     </ClInclude>
-    <ClInclude Include="Vector.hpp">
+    <ClInclude Include="Geometry\Shape.hpp">
       <Filter>Header Files\Geometry</Filter>
     </ClInclude>
-    <ClInclude Include="Shape.h">
+    <ClInclude Include="Geometry\Vector.hpp">
       <Filter>Header Files\Geometry</Filter>
     </ClInclude>
-    <ClInclude Include="Triangle.h">
+    <ClInclude Include="Geometry\Shapes\Triangle.hpp">
       <Filter>Header Files\Geometry\Shapes</Filter>
     </ClInclude>
   </ItemGroup>

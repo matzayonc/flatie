@@ -1,11 +1,11 @@
 #pragma once
 #include "Point.hpp"
 
-namespace gm {
-
+using namespace gm;
+//namespace gm {
 	class Vector: public Point {
 
 
 	};
 
-}
+//}

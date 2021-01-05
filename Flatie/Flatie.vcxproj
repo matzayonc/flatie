@@ -116,7 +116,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>P:\Libs\SFML-2.5.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>P:\Libs\SFML-2.5.1\include;$(ProjectDir)\Geometry;$(ProjectDir)\Geometry\Shapes</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
@@ -134,7 +134,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>SFML_STATIC;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>P:\Libs\SFML-2.5.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>P:\Libs\SFML-2.5.1\include;$(ProjectDir)\Geometry;$(ProjectDir)\Geometry\Shapes</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
@@ -152,12 +152,12 @@
     <ClCompile Include="Car.ixx">
       <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">CompileAsCppModule</CompileAs>
     </ClCompile>
+    <ClCompile Include="Geometry\Point.cpp" />
+    <ClCompile Include="Geometry\Shape.cpp" />
+    <ClCompile Include="Geometry\Shapes\Triangle.cpp" />
+    <ClCompile Include="Geometry\Vector.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Person.ixx" />
-    <ClCompile Include="Point.cpp" />
-    <ClCompile Include="Shape.cpp" />
-    <ClCompile Include="Triangle.cpp" />
-    <ClCompile Include="Vector.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="data\fonts\Hack-Bold.ttf" />
@@ -165,10 +165,10 @@
     <Font Include="data\fonts\Hack.ttf" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Point.hpp" />
-    <ClInclude Include="Shape.h" />
-    <ClInclude Include="Triangle.h" />
-    <ClInclude Include="Vector.hpp" />
+    <ClInclude Include="Geometry\Point.hpp" />
+    <ClInclude Include="Geometry\Shape.hpp" />
+    <ClInclude Include="Geometry\Shapes\Triangle.hpp" />
+    <ClInclude Include="Geometry\Vector.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
