@@ -92,6 +92,7 @@ public:
 		angle += speed * steeringAngle * deltaT * 5e-1f;
 		steeringAngle = 0;
 
+		std::cout << deltaT << '\n';
 
 		if (!speed && reverse)
 			changeFromReverse();
@@ -101,7 +102,6 @@ public:
 
 		if(gasing)
 			speed += (!reverse ? 1 : -1) * power * deltaT;
-
 
 		for (auto& i : shapes) {
 			i->setPosition(i->getPosition() + d);

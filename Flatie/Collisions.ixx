@@ -63,7 +63,6 @@ export bool pointInShape(sf::Vector2f point, sf::Shape* shape) {
         first = trasformedPoint(shape, i-1);
         second = trasformedPoint(shape, i);
 
-
         for (int j = i; j < shape->getPointCount(); j++)
             if (pointInTriangle(point, first, second, trasformedPoint(shape, j)))
                 return true;
@@ -75,6 +74,7 @@ export bool pointInShape(sf::Vector2f point, sf::Shape* shape) {
 
 bool lineAcrossLine(sf::Vector2f a, sf::Vector2f b, sf::Vector2f c, sf::Vector2f d)
 {
+    /*
     float denominator = ((b.x - a.x) * (d.y - c.y)) - ((b.y - a.y) * (d.x - c.x));
     float numerator1 = ((a.y - c.y) * (d.x - c.x)) - ((a.x - c.x) * (d.y - c.y));
     float numerator2 = ((a.y - c.y) * (b.x - a.x)) - ((a.x - c.x) * (b.y - a.y));
@@ -86,6 +86,10 @@ bool lineAcrossLine(sf::Vector2f a, sf::Vector2f b, sf::Vector2f c, sf::Vector2f
     float s = numerator2 / denominator;
 
     return (r >= 0 && r <= 1) && (s >= 0 && s <= 1);
+    */
+
+    gm::Point point(d.x, d.y);
+    return point.doLinesCross(gm::Point(c.x, c.y), gm::Point(a.x, a.y), gm::Point(b.x, b.y));
 }
 
 
@@ -99,22 +103,22 @@ bool lineAcrossShape(sf::Vector2f a, sf::Vector2f b, sf::Shape* shape) {
 
 
 export bool checkCollision(sf::Shape* shape, sf::Shape* other) {
-
+    /*
     for (int i = 0; i < other->getPointCount(); i++)
         if (pointInShape(trasformedPoint(other, i), shape))
             return true;
 
     for (int i = 0; i < shape->getPointCount(); i++)
         if (pointInShape(trasformedPoint(shape, i), other))
-            return true;
-    /*
+            return true;*/
+    
     for (int i = 1; i < other->getPointCount(); i++)
         if (lineAcrossShape(trasformedPoint(other, i-1), trasformedPoint(other, i), shape))
             return true;
 
     for (int i = 1; i < shape->getPointCount(); i++)
         if (lineAcrossShape(trasformedPoint(shape, i - 1), trasformedPoint(shape, i), other))
-            return true;*/
+            return true;
     
     return false;
 }

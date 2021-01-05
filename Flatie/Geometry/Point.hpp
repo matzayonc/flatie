@@ -17,6 +17,7 @@ namespace gm {
 
 		void moveBy(Vector vector);
 		double sideOfLine(Point a, Point b) const;
+		bool doLinesCross(Point other, Point a, Point b) const;
 
 		friend std::ostream& operator<<(std::ostream& output, const Point& point) {
 			return output << '(' << point.x << ", " << point.y << ')';
