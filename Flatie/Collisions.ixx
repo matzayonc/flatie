@@ -1,26 +1,49 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
+#include "Point.hpp"
+#include "Triangle.hpp"
 
 export module Collisions;
 
-
-
-
-float sign(sf::Vector2f p1, sf::Vector2f p2, sf::Vector2f p3){
-    return (p1.x - p3.x) * (p2.y - p3.y) - (p2.x - p3.x) * (p1.y - p3.y);
+gm::Point sfmlVectorToPoint(sf::Vector2f vector) {
+    return gm::Point(vector.x, vector.y);
 }
 
+float sign(sf::Vector2f p1, sf::Vector2f p2, sf::Vector2f p3){
+    //return (p1.x - p3.x) * (p2.y - p3.y) - (p2.x - p3.x) * (p1.y - p3.y);
+    return (float)gm::Point(p1.x, p1.y).sideOfLine(gm::Point(p2.x, p2.y), gm::Point(p3.x, p3.y));
+}
+
+export bool pointInTriangle(sf::Vector2f pt, sf::Vector2f a, sf::Vector2f b, sf::Vector2f c) {
+    gm::Triangle triangle(gm::Point(a.x, a.y), gm::Point(b.x, b.y), gm::Point(c.x, c.y));
+    return triangle.contains(gm::Point(pt.x, pt.y));
+}  
+/*
 export bool pointInTriangle(sf::Vector2f pt, sf::Vector2f a, sf::Vector2f b, sf::Vector2f c){
 
-    float d1 = sign(pt, a, b);
-    float d2 = sign(pt, b, c);
-    float d3 = sign(pt, c, a);
+    gm::Point A(a.x, a.y);
+    gm::Point B(b.x, b.y);
+    gm::Point C(c.x, c.y);
+
+    gm::Triangle tt(A, B, C);
+
+    sf::Vector2f da(tt[0].x, tt[1].y);
+    sf::Vector2f db(tt[1].x, tt[2].y);
+    sf::Vector2f dc(tt[2].x, tt[0].y);
+
+    if(A.x != tt[0].x || A.y != tt[0].y)
+        std::cout << A << '-' << tt[0] << std::endl;
+
+
+    float d1 = sign(pt, da, db);
+    float d2 = sign(pt, db, dc);
+    float d3 = sign(pt, dc, da);
 
     bool has_neg = (d1 < 0) || (d2 < 0) || (d3 < 0);
     bool has_pos = (d1 > 0) || (d2 > 0) || (d3 > 0);
 
     return !(has_neg && has_pos);
-}
+}*/
 
 
 sf::Vector2f trasformedPoint(sf::Shape* shape, size_t index) {
@@ -84,14 +107,14 @@ export bool checkCollision(sf::Shape* shape, sf::Shape* other) {
     for (int i = 0; i < shape->getPointCount(); i++)
         if (pointInShape(trasformedPoint(shape, i), other))
             return true;
-    
+    /*
     for (int i = 1; i < other->getPointCount(); i++)
         if (lineAcrossShape(trasformedPoint(other, i-1), trasformedPoint(other, i), shape))
             return true;
 
     for (int i = 1; i < shape->getPointCount(); i++)
         if (lineAcrossShape(trasformedPoint(shape, i - 1), trasformedPoint(shape, i), other))
-            return true;
+            return true;*/
     
     return false;
 }

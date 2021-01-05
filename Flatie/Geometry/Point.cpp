@@ -5,11 +5,12 @@
 
 using namespace gm;
 
+
 Point::Point(double x, double y) : x(x), y(y) {};
-Point::Point(const Point& point) : x(point.x), y(point.x) {};
+Point::Point(const Point& point) : x(point.x), y(point.y) {};
 
 double Point::distanceTo(Point point) const {
-	if (!x && !x) return 0;
+	if (!x && !y) return 0;
 	return std::sqrt(std::pow(x, 2) + std::pow(y, 2));
 }
 
@@ -21,4 +22,8 @@ Point Point::operator+(Vector vector) const {
 void Point::moveBy(Vector vector) {
 	x += vector.x;
 	y += vector.y;
+}
+
+double Point::sideOfLine(Point a, Point b) const {
+	return (x - b.x) * (a.y - b.y) - (a.x - b.x) * (y - b.y);
 }

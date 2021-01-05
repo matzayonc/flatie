@@ -4,16 +4,18 @@
 
 #include "Point.hpp"
 #include "Vector.hpp"
+#include "Triangle.hpp"
 
 
-import Entity;
 import Car;
 import Person;
-import Collisions;
 
 
 int main() {
-    gm::Point point(1, 2);
+    gm::Point point1(1, 2);
+    gm::Point point2(2, 3);
+    gm::Point point3(1, 3);
+    gm::Triangle tri(gm::Point(1, 2), gm::Point(2, 3), gm::Point(1, 3));
 
 
 
@@ -67,8 +69,6 @@ int main() {
                     window.setView(sf::View(visibleArea));
                 }
                 if (event.key.code == sf::Keyboard::E) {
-                    std::cout << car.collides(person) << '\n';
-
                     if (!inCar && car.collides(person))
                         inCar = true;
                     else if(inCar){
