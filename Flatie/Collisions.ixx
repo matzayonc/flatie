@@ -105,7 +105,24 @@ bool lineAcrossShape(sf::Vector2f a, sf::Vector2f b, sf::Shape* shape) {
 }
 
 
+gm::Shape sfmlShapeToGMShape(sf::Shape* shape) {
+    std::vector<gm::Point> points;
+
+    for (int i = 0; i < shape->getPointCount(); i++) {
+        sf::Vector2f vector = trasformedPoint(shape, i);
+        points.push_back(gm::Point(vector.x, vector.y));
+    }
+    return gm::Shape(points);
+}
+
+
 export bool checkCollision(sf::Shape* shape, sf::Shape* other) {
+    gm::Shape hShape = sfmlShapeToGMShape(shape);
+    gm::Shape hOther = sfmlShapeToGMShape(other);
+
+    if (hShape.collides(hOther)) return true;
+    if (hOther.collides(hShape)) return true;
+
     /*
     for (int i = 0; i < other->getPointCount(); i++)
         if (pointInShape(trasformedPoint(other, i), shape))
@@ -114,7 +131,7 @@ export bool checkCollision(sf::Shape* shape, sf::Shape* other) {
     for (int i = 0; i < shape->getPointCount(); i++)
         if (pointInShape(trasformedPoint(shape, i), other))
             return true;*/
-    
+    /*
     for (int i = 1; i < other->getPointCount(); i++)
         if (lineAcrossShape(trasformedPoint(other, i-1), trasformedPoint(other, i), shape))
             return true;
@@ -122,6 +139,6 @@ export bool checkCollision(sf::Shape* shape, sf::Shape* other) {
     for (int i = 1; i < shape->getPointCount(); i++)
         if (lineAcrossShape(trasformedPoint(shape, i - 1), trasformedPoint(shape, i), other))
             return true;
-    
+    */
     return false;
 }
