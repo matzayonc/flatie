@@ -9,6 +9,11 @@ Triangle::Triangle(Point a, Point b, Point c) {
 	vertices.push_back(c);
 }
 
+Triangle::Triangle(std::array<Point, 3> points) {
+	for (auto point : points)
+		vertices.push_back(point);
+}
+
 bool Triangle::contains(Point point) const {
 	float sAB = point.sideOfLine(vertices[0], vertices[1]);
 	float sBC = point.sideOfLine(vertices[1], vertices[2]);

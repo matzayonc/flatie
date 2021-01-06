@@ -1,4 +1,5 @@
 #include <iostream>
+#include <array>
 #include <SFML/Graphics.hpp>
 #include "Point.hpp"
 #include "Triangle.hpp"
@@ -15,7 +16,9 @@ float sign(sf::Vector2f p1, sf::Vector2f p2, sf::Vector2f p3){
 }
 
 export bool pointInTriangle(sf::Vector2f pt, sf::Vector2f a, sf::Vector2f b, sf::Vector2f c) {
-    gm::Triangle triangle(gm::Point(a.x, a.y), gm::Point(b.x, b.y), gm::Point(c.x, c.y));
+    gm::Triangle triangle(std::array<gm::Point, 3>{
+        gm::Point(a.x, a.y), gm::Point(b.x, b.y), gm::Point(c.x, c.y)
+    });
     return triangle.contains(gm::Point(pt.x, pt.y));
 }  
 /*
