@@ -3,13 +3,6 @@
 
 using namespace gm;
 
-template<class T>
-Shape::Shape(T points){
-	for (auto point : points)
-		vertices.push_back(point);
-}
-Shape::Shape() {};
-
 
 size_t Shape::getVerticesCount() const {
 	return vertices.size();
