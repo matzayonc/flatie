@@ -1,3 +1,4 @@
+#include <iostream>
 #include "Shape.hpp"
 #include "Point.hpp"
 #include "Triangle.hpp"
@@ -15,7 +16,7 @@ Point Shape::operator[](size_t index) const {
 
 double Shape::getArea() const {
 	double area = 0;
-	int j = vertices.size() - 1;
+	size_t j = vertices.size() - 1;
 	for (int i = 0; i < vertices.size(); i++) {
 		area += (vertices[j].x + vertices[i].x) * (vertices[j].y - vertices[i].y);
 		j = i;
@@ -25,7 +26,7 @@ double Shape::getArea() const {
 	return area > 0 ? area : -area;
 }
 
-bool Shape::contains(const Point& point) {
+bool Shape::contains(Point& point) {
 	if(!trianglified)
 		trianglify();
 
@@ -46,14 +47,16 @@ void Shape::trianglify() {
 }
 
 
-bool Shape::collides(const Shape& shape) {
+bool Shape::collides(Shape* shape) {
 	if (!trianglified)
 		trianglify();
 
-	for (Triangle triangle : triangles)
-		for (size_t i = 0; i < shape.getVerticesCount(); i++)
-			if (triangle.contains(shape[i]))
+	for (Triangle& triangle : triangles)
+		for (size_t i = 0; i < shape->getVerticesCount(); i++) {
+			Point point = (*shape)[i];
+			if (triangle.contains(point))
 				return true;
+		}
 
 	return false;
 }

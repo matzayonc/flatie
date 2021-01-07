@@ -11,13 +11,14 @@ private:
 	sf::Vector2f direction{ 0, 0 };
 	float speed = 1e-1f;
 
-	void resetShapes() {
+	void resetShapes() override {
 
 		auto head = std::make_shared<sf::CircleShape>(.5f, 30);
 		head->setOrigin(3, 3);
 		head->setFillColor(sf::Color::Red);
 
 		shapes.push_back(head);
+		resetHitbox();
 	}
 
 

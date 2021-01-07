@@ -36,7 +36,7 @@ private:
 	sf::Clock timeOfStop;
 
 
-	void resetShapes() {
+	void resetShapes() override {
 		shapes.clear();
 		float w = 3;
 		float h = 5;
@@ -47,6 +47,7 @@ private:
 		body->setFillColor(sf::Color::Cyan);
 
 		shapes.push_back(body);
+		resetHitbox();
 	}
 
 	void decelerate(float value) {

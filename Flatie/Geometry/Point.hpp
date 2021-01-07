@@ -20,7 +20,7 @@ namespace gm {
 		bool doLinesCross(Point other, Point a, Point b) const;
 
 		friend std::ostream& operator<<(std::ostream& output, const Point& point) {
-			return output << '(' << point.x << ", " << point.y << ')';
+			return output << '(' << point.x << ", " << point.y << ')' << std::endl;
 		};
 	};
 

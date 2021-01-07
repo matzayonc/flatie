@@ -17,8 +17,8 @@ namespace gm {
 		size_t getVerticesCount() const;
 		Point operator[](size_t index) const;
 		double getArea() const;
-		bool contains(const Point& point);
-		bool collides(const Shape& shape);
+		bool contains(Point& point);
+		bool collides(Shape* shape);
 
 	protected:
 		bool trianglified = false;
