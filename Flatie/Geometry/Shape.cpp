@@ -29,7 +29,7 @@ bool Shape::contains(const Point& point) {
 	if(!trianglified)
 		trianglify();
 
-	for (Triangle triangle : triangles)
+	for (auto triangle : triangles)
 		if (triangle.contains(point))
 			return true;
 

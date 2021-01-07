@@ -1,10 +1,12 @@
+export module Person;
+
+import Entity; 
+import Collisions;
+
 #include <vector>
 #include <iostream>
 #include <SFML/Graphics.hpp>
 
-export module Person;
-import Entity; 
-import Collisions;
 
 
 export class Person : public Entity {

@@ -1,10 +1,11 @@
+export module Collisions;
+
 #include <iostream>
 #include <array>
 #include <SFML/Graphics.hpp>
 #include "Point.hpp"
 #include "Triangle.hpp"
 
-export module Collisions;
 
 gm::Point sfmlVectorToPoint(sf::Vector2f vector) {
     return gm::Point(vector.x, vector.y);

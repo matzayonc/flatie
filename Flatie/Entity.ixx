@@ -1,17 +1,17 @@
+export module Entity;
+
 #include <vector>
 #include <memory>
 #include <SFML/Graphics.hpp>
 #include <SFML/System/Clock.hpp>
 #include "Geometry/Shape.hpp"
 
-export module Entity;
 import Collisions;
 
 
 export class Entity {
 protected:
 	std::vector<std::shared_ptr<sf::Shape>> shapes;
-	std::unique_ptr<gm::Shape> hitbox;
 	sf::Clock clock;
 
 	float tick() {
@@ -27,8 +27,6 @@ protected:
 	void resetHitbox() {
 		std::vector<gm::Point> points;
 
-		shapes[0]->getTransform().transformPoint(shapes[0]->getPoint(i));
-
 		for (int i = 0; i < shapes[0]->getPointCount(); i++) {
 			sf::Vector2f vector = shapes[0]->getTransform().transformPoint(shapes[0]->getPoint(i));
 			points.push_back(gm::Point(vector.x, vector.y));
@@ -38,8 +36,10 @@ protected:
 	}
 
 
-
 public:
+	std::unique_ptr<gm::Shape> hitbox;
+
+
 	Entity() {
 		resetHitbox();
 	}
@@ -73,9 +73,14 @@ public:
 		 return s;
 	 }
 
+	 
+
 	 bool collides(Entity other) const{
-		 if (!boundsCollide(other)) return false;
-		
-		 return checkCollision(getFirstShape(), other.getFirstShape());
+		 
+		 return other.hitbox->collides(hitbox.get()) || hitbox->collides(other.hitbox.get());
+		 
+		 
+		 //if (!boundsCollide(other)) return false;
+		 //return checkCollision(getFirstShape(), other.getFirstShape());
 	 }
 };
