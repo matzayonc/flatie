@@ -4,8 +4,6 @@
 #include "Point.hpp"
 
 namespace gm {
-	class Triangle;
-
 	class Shape{
 	public:
 		template<class T>
@@ -17,14 +15,9 @@ namespace gm {
 		size_t getVerticesCount() const;
 		Point operator[](size_t index) const;
 		double getArea() const;
-		bool contains(const Point& point);
-		bool collides(const Shape& shape);
+		bool contains(Point point) const;
 
 	protected:
-		bool trianglified = false;
-
-		void trianglify();
 		std::vector<Point> vertices;
-		std::vector<Triangle> triangles;
 	};
 }

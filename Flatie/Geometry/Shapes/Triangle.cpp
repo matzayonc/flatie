@@ -20,13 +20,3 @@ bool Triangle::contains(Point point) const {
 
 	return !(hasNegative && hasPositive);
 }
-
-
-bool Triangle::collides(Shape shape) const {
-
-	for (size_t i = 0; i < shape.getVerticesCount(); i++)
-		if (contains(shape[i]))
-			return true;
-
-	return false;
-}

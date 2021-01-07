@@ -1,6 +1,5 @@
 #include "Shape.hpp"
 #include "Point.hpp"
-#include "Triangle.hpp"
 
 using namespace gm;
 
@@ -25,37 +24,25 @@ double Shape::getArea() const {
 	return area > 0 ? area : -area;
 }
 
-bool Shape::contains(const Point& point) {
-	if(!trianglified)
-		trianglify();
+bool Shape::contains(Point point) const {
+	/*
+	
+	sf::Vector2f first = trasformedPoint(shape, 0);
+	sf::Vector2f second = trasformedPoint(shape, shape->getPointCount() - 1);
 
-	for (Triangle triangle : triangles)
-		if (triangle.contains(point))
+	for (int j = 1; j < shape->getPointCount() - 1; j++)
+		if (pointInTriangle(point, first, second, trasformedPoint(shape, j)))
 			return true;
 
-	return false;
-}
+	for (int i = 1; i < shape->getPointCount(); i++) {
+		first = trasformedPoint(shape, i - 1);
+		second = trasformedPoint(shape, i);
 
-void Shape::trianglify() {
-	trianglified = true;
-	triangles.clear();
-	size_t count = getVerticesCount();
-	for (size_t i = 0; i < count; i++) 
-		for (size_t j = 0; j < count; j++)
-			if(i != j && i+1 != j)
-				triangles.push_back(Triangle(vertices[i], vertices[(i+1)%count], vertices[j]));
-}
-
-
-bool Shape::collides(const Shape& shape) {
-	if (!trianglified)
-		trianglify();
-
-	for (Triangle triangle : triangles)
-		for (size_t i = 0; i < shape.getVerticesCount(); i++)
-			if (triangle.contains(shape[i]))
+		for (int j = i; j < shape->getPointCount(); j++)
+			if (pointInTriangle(point, first, second, trasformedPoint(shape, j)))
 				return true;
+	}
 
+	return false;*/
 	return false;
 }
-
