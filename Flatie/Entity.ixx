@@ -5,7 +5,6 @@
 
 
 export module Entity;
-import Collisions;
 
 
 export class Entity {
@@ -58,6 +57,6 @@ public:
 	 bool collides(Entity other) {
 		 if (!boundsCollide(other)) return false;
 		
-		 return checkCollision(getFirstShape(), other.getFirstShape());
+		 //return checkCollision(getFirstShape(), other.getFirstShape());
 	 }
 };

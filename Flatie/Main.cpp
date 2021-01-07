@@ -13,17 +13,6 @@ import Person;
 
 
 int main() {
-    gm::Point point1(1, 2);
-    gm::Point point2(2, 3);
-    gm::Point point3(1, 3);
-    //gm::Triangle tri(gm::Point(1, 2), gm::Point(2, 3), gm::Point(1, 3));
-
-    gm::Triangle tri(std::array<gm::Point, 3>{
-        gm::Point(1, 2), gm::Point(2, 3), gm::Point(1, 3)
-    });
-
-
-
     sf::ContextSettings(0, 0, 4);
     sf::RenderWindow window(sf::VideoMode(400, 400), "SFML testing");
     window.setFramerateLimit(144);

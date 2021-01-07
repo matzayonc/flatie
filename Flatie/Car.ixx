@@ -7,7 +7,6 @@
 
 export module Car;
 import Entity;
-import Collisions;
 
 namespace {
 	const double pi = 2 * std::acos(0.0);

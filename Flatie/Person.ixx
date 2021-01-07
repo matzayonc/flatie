@@ -4,7 +4,6 @@
 
 export module Person;
 import Entity; 
-import Collisions;
 
 
 export class Person : public Entity {
