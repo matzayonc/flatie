@@ -9,7 +9,7 @@ import Entity;
 export class Person : public Entity {
 private:
 	sf::Vector2f direction{ 0, 0 };
-	float speed = 1e-1f;
+	float speed = 1e1f;
 
 	void resetShapes() override {
 
@@ -26,7 +26,7 @@ private:
 		float dTime = tick();
 
 		for (auto& i : shapes)
-			i->setPosition(i->getPosition() + speed * direction);
+			i->setPosition(i->getPosition() + dTime * speed * direction);
 	}
 
 public:
