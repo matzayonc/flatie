@@ -47,7 +47,7 @@ private:
 		body->setFillColor(sf::Color::Cyan);
 
 		shapes.push_back(body);
-		resetHitbox();
+		hitboxFromShapes();
 	}
 
 	void decelerate(float value) {

@@ -27,7 +27,7 @@ protected:
 
 	virtual void resetShapes() {}
 
-	void resetHitbox() {
+	void hitboxFromShapes() {
 		if (!shapes.size()) throw "no shapes in Entity";
 		std::vector<gm::Point> points;
 
@@ -63,7 +63,7 @@ public:
 	 void render(sf::RenderWindow& window){
 		update();
 
-		resetHitbox();
+		hitboxFromShapes();
 
 		for (auto& i : shapes)
 			window.draw(*i.get());

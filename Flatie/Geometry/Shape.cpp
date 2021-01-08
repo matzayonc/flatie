@@ -27,6 +27,9 @@ double Shape::getArea() const {
 }
 
 bool Shape::contains(Point& point) {
+	if (!(lowestPoint.x <= point.x <= highiestPoint.x)) return false;
+	if (!(lowestPoint.y <= point.y <= highiestPoint.y)) return false;
+
 	if(!trianglified)
 		trianglify();
 
@@ -36,6 +39,7 @@ bool Shape::contains(Point& point) {
 
 	return false;
 }
+
 
 void Shape::trianglify() {
 	trianglified = true;
@@ -48,6 +52,8 @@ void Shape::trianglify() {
 
 
 bool Shape::collides(Shape* shape) {
+	if (!boundsCollide(shape)) return false;
+
 	if (!trianglified)
 		trianglify();
 
@@ -59,4 +65,22 @@ bool Shape::collides(Shape* shape) {
 		}
 
 	return false;
+}
+
+
+bool Shape::boundsCollide(Shape* shape) const {
+	if (getLowest().x > shape->getHighiest().x) return false;
+	if (getHighiest().x < shape->getLowest().x) return false;
+	if (getLowest().y > shape->getHighiest().y) return false;
+	if (getHighiest().y < shape->getLowest().y) return false;
+	return true;
+}
+
+
+Point Shape::getHighiest() const {
+	return highiestPoint;
+}
+
+Point Shape::getLowest() const {
+	return lowestPoint;
 }

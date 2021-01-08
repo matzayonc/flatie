@@ -18,7 +18,7 @@ private:
 		head->setFillColor(sf::Color::Red);
 
 		shapes.push_back(head);
-		resetHitbox();
+		hitboxFromShapes();
 	}
 
 
