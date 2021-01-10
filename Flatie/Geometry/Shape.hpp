@@ -43,11 +43,15 @@ namespace gm {
 
 		}
 
-		size_t getVerticesCount() const;
 		Point operator[](size_t index) const;
+		Shape& operator+=(const Vector& other);
+
+		size_t getVerticesCount() const;
 		double getArea() const;
 		bool contains(Point& point);
 		bool collides(Shape* shape);
+		bool crosses(Shape* shape);
+
 
 		Point getHighiest() const;
 		Point getLowest() const;

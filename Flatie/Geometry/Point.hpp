@@ -13,7 +13,9 @@ namespace gm {
 		Point(const Point &point);
 		double distanceTo(Point point) const;
 
-		Point operator+(Vector vector) const;
+		Point operator+(const Vector& vector) const;
+		Point operator+=(const Vector& vector) const;
+		Point& operator+=(const Vector& right);
 
 		void moveBy(Vector vector);
 		double sideOfLine(Point a, Point b) const;

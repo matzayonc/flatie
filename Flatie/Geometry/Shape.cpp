@@ -14,6 +14,18 @@ Point Shape::operator[](size_t index) const {
 	return vertices[index];
 }
 
+
+
+Shape& Shape::operator+=(const Vector& vector) {
+	for (auto& verticle : vertices)
+		verticle += vector;
+
+	trianglified = false;
+
+	return *this;
+}
+
+
 double Shape::getArea() const {
 	double area = 0;
 	size_t j = vertices.size() - 1;
@@ -42,17 +54,18 @@ bool Shape::contains(Point& point) {
 
 
 void Shape::trianglify() {
-	trianglified = true;
 	size_t count = getVerticesCount();
 	for (size_t i = 0; i < count; i++) 
 		for (size_t j = 0; j < count; j++)
 			if(i != j && i+1 != j)
 				triangles.push_back(Triangle(vertices[i], vertices[(i+1)%count], vertices[j]));
+	
+	trianglified = true;
 }
-
 
 bool Shape::collides(Shape* shape) {
 	if (!boundsCollide(shape)) return false;
+	if (crosses(shape)) return true;
 
 	if (!trianglified)
 		trianglify();
@@ -66,6 +79,19 @@ bool Shape::collides(Shape* shape) {
 
 	return false;
 }
+
+bool Shape::crosses(Shape* shape) {
+	for (size_t i = 0; i < getVerticesCount(); i++)
+		for (size_t j = 0; j < shape->getVerticesCount(); j++)
+			if (vertices[i].doLinesCross(
+				vertices[(i + 1) % getVerticesCount()],
+				(*shape)[j], (*shape)[(j + 1) % shape->getVerticesCount()]
+			)) return true;
+
+	return false;
+}
+
+
 
 
 bool Shape::boundsCollide(Shape* shape) const {

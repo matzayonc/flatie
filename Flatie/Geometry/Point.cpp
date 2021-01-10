@@ -14,10 +14,16 @@ double Point::distanceTo(Point point) const {
 	return std::sqrt(std::pow(x, 2) + std::pow(y, 2));
 }
 
-Point Point::operator+(Vector vector) const {
-	Point point(x + vector.x, y + vector.x);
+Point Point::operator+(const Vector& vector) const {
+	Point point(x + vector.x, y + vector.y);
 	return point;
 }
+
+Point& Point::operator+=(const Vector& vector){
+	Point point(x + vector.x, y + vector.y);
+		return point;
+}
+
 
 void Point::moveBy(Vector vector) {
 	x += vector.x;

@@ -44,6 +44,12 @@ public:
 	Entity() {
 	}
 
+	Entity& operator+=(const gm::Vector& vector) {
+		*hitbox += vector;
+
+		return *this;
+	}
+
 	gm::Shape* getHitbox() {
 		return hitbox;
 	}

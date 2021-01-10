@@ -92,7 +92,8 @@ public:
 		angle += speed * steeringAngle * deltaT * 5e-1f;
 		steeringAngle = 0;
 
-		std::cout << deltaT << '\n';
+		if(deltaT > 1e-2)
+			std::cout << deltaT << '\n';
 
 		if (!speed && reverse)
 			changeFromReverse();
