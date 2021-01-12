@@ -2,6 +2,7 @@
 #include "Shape.hpp"
 #include "Point.hpp"
 #include "Triangle.hpp"
+#include <chrono>
 
 using namespace gm;
 
@@ -15,14 +16,22 @@ Point Shape::operator[](size_t index) const {
 }
 
 
-
 Shape& Shape::operator+=(const Vector& vector) {
-	for (auto& verticle : vertices)
-		verticle += vector;
-
-	trianglified = false;
-
+	move(vector);
 	return *this;
+}
+
+void Shape::move(const Vector& vector) {
+	for (auto& verticle : vertices)
+		verticle.moveBy(vector);
+
+	offset += vector;
+	lowestPoint.moveBy(vector);
+	highiestPoint.moveBy(vector);
+
+	if (trianglified)
+		for (auto& triangle : triangles)
+			triangle.move(vector);
 }
 
 
@@ -38,9 +47,14 @@ double Shape::getArea() const {
 	return area > 0 ? area : -area;
 }
 
+Vector Shape::getOffset() const {
+	return offset;
+}
+
+
 bool Shape::contains(Point& point) {
-	if (!(lowestPoint.x <= point.x <= highiestPoint.x)) return false;
-	if (!(lowestPoint.y <= point.y <= highiestPoint.y)) return false;
+	if (!(lowestPoint.x <= point.x && point.x <= highiestPoint.x)) return false;
+	if (!(lowestPoint.y <= point.y && point.y <= highiestPoint.y)) return false;
 
 	if(!trianglified)
 		trianglify();
@@ -90,8 +104,6 @@ bool Shape::crosses(Shape* shape) {
 
 	return false;
 }
-
-
 
 
 bool Shape::boundsCollide(Shape* shape) const {

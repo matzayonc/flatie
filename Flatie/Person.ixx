@@ -12,21 +12,16 @@ private:
 	float speed = 1e1f;
 
 	void resetShapes() override {
+		shapes.push_back(std::make_shared<sf::CircleShape>(.5f, 30));
+		shapes[shapes.size()-1]->setOrigin(3, 3);
+		shapes[shapes.size()-1]->setFillColor(sf::Color::Red);
 
-		auto head = std::make_shared<sf::CircleShape>(.5f, 30);
-		head->setOrigin(3, 3);
-		head->setFillColor(sf::Color::Red);
-
-		shapes.push_back(head);
 		hitboxFromShapes();
 	}
 
-
 	void update() {
 		float dTime = tick();
-
-		for (auto& i : shapes)
-			i->setPosition(i->getPosition() + dTime * speed * direction);
+		move(dTime * speed * direction.x, dTime * speed * direction.y);
 	}
 
 public:
@@ -45,7 +40,6 @@ public:
 	}
 
 	void steer() {
-
 		sf::Vector2f dir(.0f, .0f);
 
 		auto sq = sqrt(dir.x * dir.x + dir.y * dir.y);

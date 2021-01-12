@@ -20,12 +20,17 @@ Point Point::operator+(const Vector& vector) const {
 }
 
 Point& Point::operator+=(const Vector& vector){
-	Point point(x + vector.x, y + vector.y);
-		return point;
+	x += vector.x;
+	y += vector.y;
+	return *this;
+}
+
+Vector Point::operator-(const Point& point) const {
+	return Vector(point.x - x, point.y - y);
 }
 
 
-void Point::moveBy(Vector vector) {
+void Point::moveBy(const Vector& vector) {
 	x += vector.x;
 	y += vector.y;
 }
@@ -41,8 +46,8 @@ bool Point::doLinesCross(Point other, Point a, Point b) const {
 
 	if (denominator == 0) return numerator1 == 0 && numerator2 == 0;
 
-	float r = numerator1 / denominator;
-	float s = numerator2 / denominator;
+	double r = numerator1 / denominator;
+	double s = numerator2 / denominator;
 
 	return (r >= 0 && r <= 1) && (s >= 0 && s <= 1);
 }

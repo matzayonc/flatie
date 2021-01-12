@@ -14,8 +14,8 @@ export class Entity {
 protected:
 	sf::Clock clock;
 	std::vector<std::shared_ptr<sf::Shape>> shapes;
-	gm::Shape* hitbox;
-
+	//gm::Shape* hitbox;
+	std::unique_ptr<gm::Shape> hitbox;
 
 	float tick() {
 		float time = (float)clock.getElapsedTime().asMicroseconds() / 1e6f;
@@ -36,22 +36,36 @@ protected:
 			points.push_back(gm::Point(vector.x, vector.y));
 		}
 
-		//hitbox = std::make_unique<gm::Shape>(points);
-		hitbox = new gm::Shape(points);
+		hitbox = std::make_unique<gm::Shape>(points);
 	}
 
 public:
 	Entity() {
 	}
 
-	Entity& operator+=(const gm::Vector& vector) {
-		*hitbox += vector;
+	Entity(const Entity&) = delete;
 
+	Entity& operator+=(const gm::Vector& vector) {
+		move(vector);
 		return *this;
 	}
 
-	gm::Shape* getHitbox() {
-		return hitbox;
+	void move(const gm::Vector& vector) {
+		if (!vector.x && !vector.y) return;
+
+		hitbox->move(vector);
+
+		for (auto& shape : shapes)
+			shape->setPosition(sf::Vector2f(hitbox->getOffset().x, hitbox->getOffset().y));
+			//shape->setPosition(shape->getPosition() + sf::Vector2f((float)vector.x, (float)vector.y));
+	}
+
+	void move(double x, double y) {
+		move(gm::Vector(x, y));
+	}
+
+	gm::Shape* getHitbox() const {
+		return hitbox.get();
 	}
 
 	sf::Vector2f getCoords() {
@@ -69,8 +83,6 @@ public:
 	 void render(sf::RenderWindow& window){
 		update();
 
-		hitboxFromShapes();
-
 		for (auto& i : shapes)
 			window.draw(*i.get());
 	 }
@@ -85,7 +97,7 @@ public:
 		 return s;
 	 }
 
-	 bool collides(Entity other) {
+	 bool collides(const Entity& other) {
 		 //if (!boundsCollide(other)) return false;
 
 		 if (hitbox->collides(other.getHitbox())) return true;

@@ -89,11 +89,9 @@ public:
 		sf::Vector2f d(sinDeg(-angle)*speed*deltaT, cosDeg(-angle)*speed*deltaT);
 		decelerate(dragCoeff * speed * speed * deltaT);
 
-		angle += speed * steeringAngle * deltaT * 5e-1f;
-		steeringAngle = 0;
 
-		if(deltaT > 1e-2)
-			std::cout << deltaT << '\n';
+		if (deltaT > 1e-2)
+			;//std::cout << deltaT << '\n';
 
 		if (!speed && reverse)
 			changeFromReverse();
@@ -103,6 +101,12 @@ public:
 
 		if(gasing)
 			speed += (!reverse ? 1 : -1) * power * deltaT;
+
+		move(d.x, d.y);
+
+		angle += speed * steeringAngle * deltaT * 5e-1f;
+		steeringAngle = 0;
+
 
 		for (auto& i : shapes) {
 			i->setPosition(i->getPosition() + d);

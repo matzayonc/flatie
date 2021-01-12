@@ -1,8 +1,15 @@
 #pragma once
 #include <iostream>
-#include "Vector.hpp"
 
 namespace gm {
+	class Point;
+}
+
+#include "Vector.hpp"
+
+
+namespace gm {
+
 	class Point {
 	protected:
 
@@ -14,10 +21,10 @@ namespace gm {
 		double distanceTo(Point point) const;
 
 		Point operator+(const Vector& vector) const;
-		Point operator+=(const Vector& vector) const;
-		Point& operator+=(const Vector& right);
+		Point& operator+=(const Vector& vector);
+		Vector operator-(const Point& point) const;
 
-		void moveBy(Vector vector);
+		void moveBy(const Vector& vector);
 		double sideOfLine(Point a, Point b) const;
 		bool doLinesCross(Point other, Point a, Point b) const;
 
