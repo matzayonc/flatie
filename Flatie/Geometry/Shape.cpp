@@ -15,7 +15,6 @@ Point Shape::operator[](size_t index) const {
 	return vertices[index];
 }
 
-
 Shape& Shape::operator+=(const Vector& vector) {
 	move(vector);
 	return *this;
@@ -121,4 +120,20 @@ Point Shape::getHighiest() const {
 
 Point Shape::getLowest() const {
 	return lowestPoint;
+}
+
+float Shape::getRotation() {
+	return rotation * 180.f / 3.141592654f;
+}
+
+void Shape::setRotation(float angle) {
+	setRotationRad(angle * 3.141592654f / 180.f);
+}
+
+void Shape::rotate(float angle) {
+	setRotationRad(rotation + angle * 3.141592654f / 180.f);
+}
+
+void Shape::setRotationRad(float radians) {
+	//WRITE ME!
 }

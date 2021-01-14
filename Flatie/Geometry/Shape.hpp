@@ -16,8 +16,10 @@ namespace gm {
 		std::vector<Triangle> triangles;
 		Point highiestPoint{0, 0};
 		Point lowestPoint{0, 0};
+		float rotation;
 
 		void trianglify();
+		void setRotationRad(float radians);
 
 	public:
 		Shape& operator+=(const Vector& other);
@@ -35,6 +37,11 @@ namespace gm {
 		Point getLowest() const;
 		Vector getOffset() const;
 		bool boundsCollide(Shape* shape) const;
+
+		float getRotation();
+		void setRotation(float angle);
+		void rotate(float angle);
+
 
 		template<class T>
 		Shape(T points) { ///IDK how to move id to cpp :(
